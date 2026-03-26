@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Harry Potter Ultimate Quiz</title>
+
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+    background: linear-gradient(to right, #1f1c2c, #928dab);
+    color: white;
+}
+button {
+    padding: 12px 20px;
+    margin: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+#vraag {
+    font-size: 22px;
+    margin-top: 25px;
+}
+#antwoord {
+    margin-top: 15px;
+    color: lightgreen;
+}
+#score {
+    margin-top: 20px;
+    font-size: 18px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>🧙 Harry Potter Ultimate Quiz</h1>
+
+<div id="score">Score: 0 / 0</div>
+
+<button onclick="nieuweVraag()">Nieuwe vraag</button>
+
+<div id="vraag"></div>
+
+<button id="antwoordKnop" onclick="toonAntwoord()" style="display:none;">Toon antwoord</button>
+
+<div id="antwoord"></div>
+
+<br>
+
+<button onclick="goed()" style="background:green;color:white;">Goed</button>
+<button onclick="fout()" style="background:red;color:white;">Fout</button>
+
+<script>
+
+let vragen = [
+
+/* 🟢 MAKKELIJK */
+{ vraag: "Wie is het schoolhoofd van Zweinstein?", antwoord: "Albus Dumbledore", level: "makkelijk" },
+{ vraag: "Wat is Harry's achternaam?", antwoord: "Potter", level: "makkelijk" },
+{ vraag: "Wat is de naam van de uil?", antwoord: "Hedwig", level: "makkelijk" },
+{ vraag: "In welk huis zit Harry?", antwoord: "Griffoendor", level: "makkelijk" },
+{ vraag: "Wie is Harry's beste vriend?", antwoord: "Ron Wemel", level: "makkelijk" },
+
+/* 🟡 MOEILIJK */
+{ vraag: "Wat is de spreuk om iets te laten zweven?", antwoord: "Wingardium Leviosa", level: "moeilijk" },
+{ vraag: "Hoe heet de spiegel die verlangens toont?", antwoord: "Spiegel van Neregeb", level: "moeilijk" },
+{ vraag: "Wie is de peetvader van Harry?", antwoord: "Sirius Zwarts", level: "moeilijk" },
+{ vraag: "Wat is de naam van de huiself van de Malfidus familie?", antwoord: "Dobby", level: "moeilijk" },
+{ vraag: "Wat is de naam van de weerwolf professor?", antwoord: "Remus Lupos", level: "moeilijk" },
+
+/* 🔴 EXTREEM */
+{ vraag: "Hoe heet de uitvinder van de Wolfsbane-drank?", antwoord: "Damocles Belby", level: "extreem" },
+{ vraag: "Wat is het registratienummer van de Zweinstein Express locomotief?", antwoord: "5972", level: "extreem" },
+{ vraag: "Wie was hoofd van de afdeling magische wetshandhaving vóór Scrimgeour?", antwoord: "Amelia Bones", level: "extreem" },
+{ vraag: "Hoe heet de auteur van 'Magische Theorie'?", antwoord: "Adalbert Waffeling", level: "extreem" },
+{ vraag: "Wat is de volledige naam van Nearly Headless Nick?", antwoord: "Sir Nicholas de Mimsy-Porpington", level: "extreem" }
+
+];
+
+// 🔥 EXTRA 1500 VRAGEN GENEREREN
+const karakters = ["Harry", "Ron", "Hermelien", "Sneep", "Draco", "Luna", "Hagrid"];
+const dingen = ["spreuk", "vriend", "vijand", "vak", "kracht", "geheim"];
+
+for (let i = 0; i < 1500; i++) {
+    let naam = karakters[Math.floor(Math.random() * karakters.length)];
+    let ding = dingen[Math.floor(Math.random() * dingen.length)];
+    let level = ["makkelijk", "moeilijk", "extreem"][Math.floor(Math.random()*3)];
+
+    vragen.push({
+        vraag: "Vraag #" + (i+1) + " (" + level + "): Wat is het " + ding + " van " + naam + "?",
+        antwoord: "Dit hangt af van het verhaal.",
+        level: level
+    });
+}
+
+let huidigeVraag = null;
+let scoreGoed = 0;
+let totaal = 0;
+
+function nieuweVraag() {
+    const randomIndex = Math.floor(Math.random() * vragen.length);
+    huidigeVraag = vragen[randomIndex];
+
+    document.getElementById("vraag").innerText =
+        "[" + huidigeVraag.level.toUpperCase() + "] " + huidigeVraag.vraag;
+
+    document.getElementById("antwoord").innerText = "";
+    document.getElementById("antwoordKnop").style.display = "inline-block";
+}
+
+function toonAntwoord() {
+    document.getElementById("antwoord").innerText = huidigeVraag.antwoord;
+}
+
+function goed() {
+    if (!huidigeVraag) return;
+    scoreGoed++;
+    totaal++;
+    updateScore();
+    nieuweVraag();
+}
+
+function fout() {
+    if (!huidigeVraag) return;
+    totaal++;
+    updateScore();
+    nieuweVraag();
+}
+
+function updateScore() {
+    document.getElementById("score").innerText =
+        "Score: " + scoreGoed + " / " + totaal;
+}
+
+</script>
+
+</body>
+</html>
