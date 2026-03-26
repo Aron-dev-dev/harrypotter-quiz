@@ -2,54 +2,41 @@
 <html lang="nl">
 <head>
 <meta charset="UTF-8">
-<title>Harry Potter Ultimate Quiz</title>
+<title>Harry Potter Quiz</title>
 
 <style>
 body {
     font-family: Arial;
     text-align: center;
-    background: linear-gradient(to right, #1f1c2c, #928dab);
+    background: #1a1a2e;
     color: white;
 }
 button {
-    padding: 12px 20px;
+    padding: 10px 20px;
     margin: 8px;
     font-size: 16px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
 }
-#vraag {
-    font-size: 22px;
-    margin-top: 25px;
-}
-#antwoord {
-    margin-top: 15px;
-    color: lightgreen;
-}
-#score {
-    margin-top: 20px;
-    font-size: 18px;
-}
+#vraag { font-size: 22px; margin-top: 25px; }
+#antwoord { margin-top: 15px; color: lightgreen; }
+#score { margin-top: 20px; }
 </style>
-
 </head>
+
 <body>
 
-<h1>🧙 Harry Potter Ultimate Quiz</h1>
-
+<h1>🧙 Harry Potter Quiz</h1>
 <div id="score">Score: 0 / 0</div>
 
 <button onclick="nieuweVraag()">Nieuwe vraag</button>
 
 <div id="vraag"></div>
-
 <button id="antwoordKnop" onclick="toonAntwoord()" style="display:none;">Toon antwoord</button>
-
 <div id="antwoord"></div>
 
 <br>
-
 <button onclick="goed()" style="background:green;color:white;">Goed</button>
 <button onclick="fout()" style="background:red;color:white;">Fout</button>
 
@@ -59,42 +46,47 @@ let vragen = [
 
 /* 🟢 MAKKELIJK */
 { vraag: "Wie is het schoolhoofd van Zweinstein?", antwoord: "Albus Dumbledore", level: "makkelijk" },
-{ vraag: "Wat is Harry's achternaam?", antwoord: "Potter", level: "makkelijk" },
-{ vraag: "Wat is de naam van de uil?", antwoord: "Hedwig", level: "makkelijk" },
-{ vraag: "In welk huis zit Harry?", antwoord: "Griffoendor", level: "makkelijk" },
-{ vraag: "Wie is Harry's beste vriend?", antwoord: "Ron Wemel", level: "makkelijk" },
+{ vraag: "Wat is Harry's uil?", antwoord: "Hedwig", level: "makkelijk" },
+{ vraag: "In welk huis zit Draco?", antwoord: "Zwadderich", level: "makkelijk" },
+{ vraag: "Wat is de sport op bezems?", antwoord: "Zwerkbal", level: "makkelijk" },
 
 /* 🟡 MOEILIJK */
-{ vraag: "Wat is de spreuk om iets te laten zweven?", antwoord: "Wingardium Leviosa", level: "moeilijk" },
-{ vraag: "Hoe heet de spiegel die verlangens toont?", antwoord: "Spiegel van Neregeb", level: "moeilijk" },
-{ vraag: "Wie is de peetvader van Harry?", antwoord: "Sirius Zwarts", level: "moeilijk" },
-{ vraag: "Wat is de naam van de huiself van de Malfidus familie?", antwoord: "Dobby", level: "moeilijk" },
-{ vraag: "Wat is de naam van de weerwolf professor?", antwoord: "Remus Lupos", level: "moeilijk" },
+{ vraag: "Wat is de spreuk om iemand te ontwapenen?", antwoord: "Expelliarmus", level: "moeilijk" },
+{ vraag: "Wie gaf Harry de Onzichtbaarheidsmantel?", antwoord: "Albus Dumbledore", level: "moeilijk" },
+{ vraag: "Wat is de naam van de gevangenis?", antwoord: "Azkaban", level: "moeilijk" },
+{ vraag: "Wie doodde Bellatrix van Detta?", antwoord: "Molly Wemel", level: "moeilijk" },
+{ vraag: "Wat is de naam van de draak in de Vuurbeker?", antwoord: "Hongaarse Hoornstaart", level: "moeilijk" },
+{ vraag: "Hoe heet de kaart die alle mensen toont?", antwoord: "De Sluipwegwijzer", level: "moeilijk" },
 
 /* 🔴 EXTREEM */
-{ vraag: "Hoe heet de uitvinder van de Wolfsbane-drank?", antwoord: "Damocles Belby", level: "extreem" },
-{ vraag: "Wat is het registratienummer van de Zweinstein Express locomotief?", antwoord: "5972", level: "extreem" },
-{ vraag: "Wie was hoofd van de afdeling magische wetshandhaving vóór Scrimgeour?", antwoord: "Amelia Bones", level: "extreem" },
-{ vraag: "Hoe heet de auteur van 'Magische Theorie'?", antwoord: "Adalbert Waffeling", level: "extreem" },
-{ vraag: "Wat is de volledige naam van Nearly Headless Nick?", antwoord: "Sir Nicholas de Mimsy-Porpington", level: "extreem" }
+{ vraag: "Wat is de volledige naam van Voldemort?", antwoord: "Tom Marvolo Riddle", level: "extreem" },
+{ vraag: "Hoeveel horcruxes maakte Voldemort?", antwoord: "7", level: "extreem" },
+{ vraag: "Wat is de naam van Regulus Zwarts' huiself?", antwoord: "Kreacher", level: "extreem" },
+{ vraag: "Wie stal het echte medaillon van Zwadderich?", antwoord: "Regulus Zwarts", level: "extreem" },
+{ vraag: "Wat is de spreuk voor de Patronus van Harry?", antwoord: "Expecto Patronum", level: "extreem" },
+{ vraag: "Wie was de Halfbloed Prins?", antwoord: "Severus Sneep", level: "extreem" },
+{ vraag: "Wat is de naam van Aragog's kolonie?", antwoord: "Het Verboden Bos", level: "extreem" },
+{ vraag: "Wie opende de Geheime Kamer voor de tweede keer?", antwoord: "Ginny Wemel (onder controle van Riddle)", level: "extreem" },
+{ vraag: "Welke vloek doodt direct?", antwoord: "Avada Kedavra", level: "extreem" },
+{ vraag: "Wat is de naam van de school in Beauxbatons?", antwoord: "Beauxbatons Academie", level: "extreem" },
+
+/* 🔥 EXTRA MOEILIJK */
+{ vraag: "Wat is de naam van de minister van Toverkunst in boek 5?", antwoord: "Cornelius Droebel", level: "extreem" },
+{ vraag: "Wie verving Droebel?", antwoord: "Rufus Schobbejak", level: "extreem" },
+{ vraag: "Wat is de naam van de winkel van de Wemels?", antwoord: "Wemels' Tovenaarsgrappen", level: "moeilijk" },
+{ vraag: "Welke professor geeft Waarzeggerij?", antwoord: "Sybill Zwamdrift", level: "moeilijk" },
+{ vraag: "Wie bewaakt Azkaban?", antwoord: "Dementors", level: "moeilijk" },
+{ vraag: "Wat drink je voor geluk?", antwoord: "Felix Fortunatix", level: "moeilijk" },
+
+/* 💥 NOG MEER */
+{ vraag: "Wat is de naam van Harry's zoon?", antwoord: "Albus Severus Potter", level: "moeilijk" },
+{ vraag: "Wie trouwt met Ron?", antwoord: "Hermelien Griffel", level: "makkelijk" },
+{ vraag: "Wie trouwt met Harry?", antwoord: "Ginny Wemel", level: "makkelijk" },
+{ vraag: "Wat is de naam van de feniks van Dumbledore?", antwoord: "Fawkes", level: "moeilijk" },
+{ vraag: "Welke bal wordt gebruikt om te scoren bij Zwerkbal?", antwoord: "De Slurk", level: "moeilijk" },
+{ vraag: "Wat is de naam van de bewaker van de sleutel?", antwoord: "Hagrid", level: "makkelijk" }
 
 ];
-
-// 🔥 EXTRA 1500 VRAGEN GENEREREN
-const karakters = ["Harry", "Ron", "Hermelien", "Sneep", "Draco", "Luna", "Hagrid"];
-const dingen = ["spreuk", "vriend", "vijand", "vak", "kracht", "geheim"];
-
-for (let i = 0; i < 1500; i++) {
-    let naam = karakters[Math.floor(Math.random() * karakters.length)];
-    let ding = dingen[Math.floor(Math.random() * dingen.length)];
-    let level = ["makkelijk", "moeilijk", "extreem"][Math.floor(Math.random()*3)];
-
-    vragen.push({
-        vraag: "Vraag #" + (i+1) + " (" + level + "): Wat is het " + ding + " van " + naam + "?",
-        antwoord: "Dit hangt af van het verhaal.",
-        level: level
-    });
-}
 
 let huidigeVraag = null;
 let scoreGoed = 0;
